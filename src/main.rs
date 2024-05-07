@@ -1,6 +1,7 @@
 mod network;
 
-use crate::network::net::connect;
+use network::net::{connect, new_config};
+
 use clap::{Arg, Command};
 
 fn main() {
@@ -30,7 +31,7 @@ fn main() {
     let server = matches.get_one::<String>("connect").unwrap().to_string();
     let port = matches.get_one::<String>("port_number").unwrap().to_string();
     
-    let connection = connect(server, port);
-    println!("{}", connection);
+    let server_config = new_config(server, port);
+    connect(server_config);
 }
 
